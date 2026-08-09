@@ -12,9 +12,9 @@
 
 ## Technical Context
 
-**Language/Version**: TypeScript 5.x 또는 최신 ES 모듈 지원 브라우저 호환 JavaScript
+**Language/Version**: JavaScript (ES2020+, 빌드 도구 없이 브라우저 네이티브 ES 모듈 사용)
 
-**Primary Dependencies**: 표준 웹 플랫폼 API, 필요한 경우 경량 번들러 `esbuild` 또는 `tsc`만 사용
+**Primary Dependencies**: 표준 웹 플랫폼 API, 필요한 경우 경량 번들러 `esbuild` 또는 `tsc`는 향후 필요 시 도입 가능한 대안으로 검토
 
 **Storage**: localStorage — 과목 몇 개와 과제 수십 개 규모에 충분한 단순 영구 저장. 저장소 접근을 추상화한 별도 모듈로 분리하여 향후 데이터가 커질 때 IndexedDB로 전환할 수 있도록 설계한다.
 
@@ -58,14 +58,14 @@ specs/001-assignment-dashboard/
 src/
 ├── index.html
 ├── styles.css
-├── main.ts
-├── storage.ts
-├── ui.ts
-├── models.ts
+├── main.js
+├── storage.js
+├── ui.js
+├── models.js
 └── tests/
-    ├── storage.test.ts
-    ├── ui.test.ts
-    └── models.test.ts
+    ├── storage.test.js
+    ├── ui.test.js
+    └── models.test.js
 ```
 
 **Structure Decision**: 단일 프론트엔드 프로젝트 구조를 채택하여 외부 백엔드 없이 클라이언트 로컬 저장을 중심으로 구현한다.
