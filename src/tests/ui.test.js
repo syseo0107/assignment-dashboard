@@ -38,6 +38,38 @@ describe('ui integration', () => {
     expect(document.getElementById('summary-panel').textContent).toContain('전체 과제');
   });
 
+  it('marks the active subject filter button with aria-pressed', () => {
+    const state = { subjects: [{ id: '1', name: 'Math', color: '#ff0000' }] };
+    ui.renderSubjectControls(state, '1', { onFilterChange: () => {}, onDeleteSubject: () => {} });
+
+    const button = document.querySelector('#subject-filter button[data-filter="1"]');
+    expect(button).not.toBeNull();
+    expect(button.getAttribute('aria-pressed')).toBe('true');
+  });
+
+  it('preserves datetime-local input values when submitting assignments', () => {
+    const assignmentSubject = document.querySelector('select[name="assignmentSubject"]');
+    const option = document.createElement('option');
+    option.value = '1';
+    option.textContent = 'Math';
+    assignmentSubject.appendChild(option);
+    assignmentSubject.value = '1';
+
+    document.querySelector('input[name="assignmentTitle"]').value = 'Late night task';
+    document.querySelector('textarea[name="assignmentDescription"]').value = 'Finish by tomorrow';
+    document.querySelector('input[name="assignmentDue"]').value = '2026-08-10T23:59';
+
+    let captured = null;
+    ui.bindAssignmentForm((assignment) => {
+      captured = assignment;
+    });
+
+    document.getElementById('assignment-form').dispatchEvent(new dom.window.Event('submit'));
+
+    expect(captured).not.toBeNull();
+    expect(captured.due_datetime).toBe('2026-08-10T23:59');
+  });
+
   it('updates assignment completed state through handler', () => {
     const state = {
       subjects: [{ id: '1', name: 'Math', color: '#ff0000' }],

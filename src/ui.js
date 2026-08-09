@@ -62,6 +62,7 @@ function createFilterButton(label, value, active) {
   button.className = `filter-button${active ? ' active' : ''}`;
   button.textContent = label;
   button.dataset.filter = value;
+  button.setAttribute('aria-pressed', active ? 'true' : 'false');
   return button;
 }
 
@@ -134,7 +135,7 @@ export function bindAssignmentForm(onSubmit) {
       id: formData.get('assignmentId'),
       title: formData.get('assignmentTitle')?.toString().trim(),
       description: formData.get('assignmentDescription')?.toString().trim(),
-      due_datetime: formData.get('assignmentDue') ? new Date(formData.get('assignmentDue').toString()).toISOString() : '',
+      due_datetime: formData.get('assignmentDue')?.toString().trim() || '',
       subject_id: formData.get('assignmentSubject')?.toString().trim(),
       completed_flag: false
     });

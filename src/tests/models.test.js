@@ -28,6 +28,13 @@ describe('models', () => {
     expect(result.label).toBe('D-2');
   });
 
+  it('computes calendar-day D-day across midnight boundaries', () => {
+    const assignment = { due_datetime: '2026-08-10T00:00', completed_flag: false };
+    const result = getAssignmentStatus(assignment, new Date('2026-08-09T23:59:00'));
+    expect(result.status).toBe('warning');
+    expect(result.label).toBe('D-1');
+  });
+
   it('sorts assignments with overdue first then due date ascending and completed last', () => {
     const items = [
       { id: 'a', due_datetime: '2026-08-20T12:00:00', completed_flag: false },
