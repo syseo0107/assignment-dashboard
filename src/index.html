@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assignment Dashboard</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <h1>Assignment Dashboard</h1>
+      <p>과목별 과제를 등록하고 마감일을 관리하세요.</p>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <section class="panel panel--form">
+          <h2>과목 관리</h2>
+          <form id="subject-form" class="form">
+            <input type="hidden" name="subjectId" />
+            <label>
+              <span>과목 이름</span>
+              <input type="text" name="subjectName" required />
+            </label>
+            <label>
+              <span>색상</span>
+              <input type="color" name="subjectColor" value="#4f6fc1" required />
+            </label>
+            <button type="submit">과목 추가</button>
+          </form>
+          <div id="subject-list" class="subject-list"></div>
+        </section>
+
+        <section class="panel panel--form">
+          <h2>과제 추가</h2>
+          <form id="assignment-form" class="form">
+            <input type="hidden" name="assignmentId" />
+            <label>
+              <span>제목</span>
+              <input type="text" name="assignmentTitle" required />
+            </label>
+            <label>
+              <span>설명</span>
+              <textarea name="assignmentDescription" rows="3"></textarea>
+            </label>
+            <label>
+              <span>마감일시</span>
+              <input type="datetime-local" name="assignmentDue" required />
+            </label>
+            <label>
+              <span>과목</span>
+              <select name="assignmentSubject" required></select>
+            </label>
+            <button type="submit">과제 추가</button>
+          </form>
+          <div id="subject-filter" class="filter-group"></div>
+          <div id="summary-panel" class="summary-panel"></div>
+        </section>
+      </aside>
+
+      <main class="content">
+        <section class="panel panel--content">
+          <h2>과제 대시보드</h2>
+          <div id="assignment-list" class="assignment-list"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
