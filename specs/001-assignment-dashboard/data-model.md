@@ -32,3 +32,7 @@
 - 과제 완료: `completed_flag`가 `true`로 전환되고, 목록 하단으로 이동.
 - 과제 삭제: 관련 Assignment가 제거된다.
 - 과제 수정: title, description, due_datetime, subject_id를 변경할 수 있다.
+
+## Storage Abstraction
+- 로컬 데이터 저장은 `localStorage`를 통해 JSON으로 보관한다.
+- 저장소 접근은 `storage` 모듈로 분리하여 구현하며, 향후 데이터 규모가 커질 경우 `IndexedDB`로 전환할 수 있도록 모듈 인터페이스를 유지한다.

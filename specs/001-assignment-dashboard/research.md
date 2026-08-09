@@ -1,10 +1,10 @@
 # Research: assignment-dashboard
 
 ## Decision: Storage 방식
-- 선택: IndexedDB
-- 이유: 로컬 브라우저에 구조화된 데이터를 안정적으로 저장할 수 있으며, 데이터 용량과 구조 확장성에서 localStorage보다 유리하다. 과제 목록, 과목, 완료 상태를 객체 형태로 저장하고 읽기/쓰기 성능을 확보할 수 있다.
-- 검토된 대안: localStorage, 파일 다운로드/업로드, 서버 동기화
-- 트레이드오프: IndexedDB는 API가 복잡하여 코드가 다소 무거워질 수 있지만, 데이터 무결성과 확장성을 위해 적절하다. localStorage는 사용이 간편하나 용량 제한과 동시성, 구조화된 객체 저장 취약점 때문에 적합하지 않다.
+- 선택: localStorage
+- 이유: 과목 몇 개와 과제 수십 개 규모의 앱에는 localStorage가 단순하고 유지보수가 쉽다. 복잡한 저장소 인프라가 불필요하며, 웹 표준 우선과 `Simplicity & Maintainability` 원칙에 부합한다.
+- 검토된 대안: IndexedDB, 파일 다운로드/업로드, 서버 동기화
+- 트레이드오프: localStorage는 객체를 직접 저장할 수 없어 JSON 직렬화/역직렬화가 필요하고 동시성 제어가 제한적이다. 하지만 현재 데이터 규모에서는 단순성과 운영 비용 절감이 더 중요하며, 저장소 접근을 추상화하여 향후 IndexedDB로 전환할 수 있도록 설계한다.
 
 ## Decision: UI 구현 방식
 - 선택: 표준 HTML/CSS/JavaScript 기반 컴포넌트
